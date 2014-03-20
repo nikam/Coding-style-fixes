@@ -1,0 +1,54 @@
+diff --git a/BulkActionComponent.qml b/cBulkActionComponent.qml
+index 6889eac..cab3457 100644
+--- a/BulkActionComponent.qml
++++ b/cBulkActionComponent.qml
+@@ -23,26 +23,28 @@ import org.kde 4.5
+ import org.kde.pim.mobileui 4.5 as KPIM
+ 
+ KPIM.BulkActionScreen {
+-  id : bulkActionScreen
+-  property bool initialized : false
+-  anchors.fill: parent
+-
+-  actionListWidth : 1/3 * parent.width
+-  multipleText : KDE.i18np("1 folder", "%1 folders", collectionView.numSelected)
+-  selectedItemModel : _breadcrumbNavigationFactory.qmlSelectedItemModel();
+-  headerList : ContactListView {
+-    showCheckBox : true
+-    id: bulkActionContactList
+-    model: itemModel
+-    checkModel : _itemActionModel
+-    anchors.fill : parent
+-    itemHeight: bulkActionScreen.itemHeight
+-  }
+-
+-  QML.Component.onCompleted: {
+-    if ( initialized == false ) {
+-      bulkActionScreen.actionModel.append( {"action": "send_mail_to"} )
+-      initialized = true;
++    id: bulkActionScreen
++    anchors.fill: parent
++
++    property bool initialized: false
++
++    actionListWidth: 1/3 * parent.width
++    multipleText: KDE.i18np("1 folder", "%1 folders", collectionView.numSelected)
++    selectedItemModel: _breadcrumbNavigationFactory.qmlSelectedItemModel();
++
++    headerList: ContactListView {
++        id: bulkActionContactList
++        anchors.fill: parent
++        showCheckBox: true
++        model: itemModel
++        checkModel: _itemActionModel
++        itemHeight: bulkActionScreen.itemHeight
++    }
++
++    QML.Component.onCompleted: {
++        if ( initialized == false ) {
++            bulkActionScreen.actionModel.append( {"action": "send_mail_to"} )
++            initialized = true;
++        }
+     }
+-  }
+ }

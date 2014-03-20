@@ -1,0 +1,92 @@
+diff --git a/ApplicationGeneralActions.qml b/cApplicationGeneralActions.qml
+index f4447e5..12a533d 100644
+--- a/ApplicationGeneralActions.qml
++++ b/cApplicationGeneralActions.qml
+@@ -25,33 +25,32 @@ import org.kde.pim.mobileui 4.5 as KPIM
+ 
+ 
+ KPIM.ActionList {
++    id: actions
+ 
+-  id : actions
++    property alias configureActionVisible: configureAction.visible
++    property alias addNewActionName: addNewAction.name
++    property alias addNewActionReactsOnLongPressed: addNewAction.reactsOnLongPressed
++    //property alias searchActionTitle: searchAction.title
++    property alias configureActionTitle: configureAction.title
++    property string type
+ 
+-  property alias configureActionVisible: configureAction.visible
+-  property string type
+-  property alias addNewActionName: addNewAction.name
+-  property alias addNewActionReactsOnLongPressed: addNewAction.reactsOnLongPressed
+-  //property alias searchActionTitle: searchAction.title
+-  property alias configureActionTitle: configureAction.title
++    signal longPressed(string actionName)
+ 
+-  signal longPressed(string actionName)
++    KPIM.ActionListItem {
++        name: "quit_akonadi"
+ 
+-  KPIM.ActionListItem {
+-    name: "quit_akonadi"
+-
+-    onPressAndHold: {
+-      longPressed(name);
++        onPressAndHold: {
++            longPressed(name);
++        }
+     }
+-  }
+ 
+-  KPIM.ActionListItem {
+-    id: addNewAction
++    KPIM.ActionListItem {
++        id: addNewAction
+ 
+-    onPressAndHold: {
+-      longPressed(name);
++        onPressAndHold: {
++            longPressed(name);
++        }
+     }
+-  }
+ 
+ //TODO enable when SearchWidget::query() is implemented
+ //   KPIM.ScriptActionItem {
+@@ -59,22 +58,22 @@ KPIM.ActionList {
+ //     name : "search_" + type
+ //   }
+ 
+-  KPIM.ActionListItem {
+-    name: "akonadi_work_offline"
++    KPIM.ActionListItem {
++        name: "akonadi_work_offline"
+ 
+-    onPressAndHold: {
+-      longPressed(name);
++        onPressAndHold: {
++            longPressed(name);
++        }
+     }
+-  }
+ 
+-  KPIM.ScriptActionItem {
+-    id: configureAction
+-    name: "configure"
+-  }
++    KPIM.ScriptActionItem {
++        id: configureAction
++        name: "configure"
++    }
+ 
+-  KPIM.ScriptActionItem  {
+-    name: "show_about_dialog"
+-    title: KDE.i18n( "About Kontact Touch" )
+-  }
++    KPIM.ScriptActionItem  {
++        name: "show_about_dialog"
++        title: KDE.i18n( "About Kontact Touch" )
++    }
+ }
+ 
